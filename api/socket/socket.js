@@ -30,7 +30,7 @@ export const chatSocket = () => {
         })
     })
 
-    server.listen(process.env.PORT || 5001, () => {
+    server.listen(process.env.PORT || 5000, () => {
         console.log('Backend server listening on port 5001')
     });
 }
