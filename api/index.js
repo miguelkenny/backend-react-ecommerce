@@ -57,5 +57,5 @@ app.use('/api/checkout', stripeRoutes)
 chatSocket(io)
 
 server.listen(process.env.PORT || 5000, () => {
-    console.log('Backend server listening on port ', process.env.PORT)
+    console.log('Backend server listening on port ', server.address().port);
 });
