@@ -1,8 +1,8 @@
-.container, .button, form{
+.contenedor, .buttonChat, .formChat{
     position: absolute;
 }
 
-.container{
+.contenedor{
     margin: auto;
     bottom: 10%;
     right: 10%;
@@ -13,7 +13,7 @@
     display: none;
 }
 
-.button{
+.buttonChat{
     z-index: 999;
     width: 53px;
     height: 53px;
@@ -24,7 +24,7 @@
     cursor: pointer;
 }
 
-.button:before{
+.buttonChat:before{
     position: absolute;
     top: 25px;
     left: 14px;
@@ -35,7 +35,7 @@
     transform: rotate(90deg);
 }
 
-.button:after{
+.buttonChat:after{
     position: absolute;
     top: 25px;
     left: 14px;
@@ -45,7 +45,7 @@
     background: #fff;
 }
 
-form {
+.formChat {
     transform: translateY(-10%);
     opacity: 0;
     bottom: 5px;
@@ -60,7 +60,7 @@ form {
     overflow-y: auto;
 }
 
-form {
+.formChat {
     text-align: center;
     display: block;
     margin: 20px 0;
@@ -70,13 +70,13 @@ form {
     transition: all 300ms;
 }
 
-ul{
+.ulBoxMessage{
     display: flex;
     flex-direction: column;
     padding-inline-start: 0px;
 }
 
-li {
+.liItemMessage {
     margin: 6px;
     list-style:none;
     padding: 5px;

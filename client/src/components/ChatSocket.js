@@ -3,7 +3,7 @@ import io from "socket.io-client";
 import { useSelector } from 'react-redux'
 import "./ChatSocket.css"
 
-const socket = io('http://localhost:5001')
+const socket = io('https://app-ecommerce-backend-coder.herokuapp.com')
 
 const ChatSocket = () => {
     const user = useSelector(state => state.user.currentUser)
@@ -41,10 +41,10 @@ const ChatSocket = () => {
     }, [messages])
 
     return (
-        <div className="container">
+        <div className="contenedor">
             <input type="checkbox" id="toggle" />
-            <label htmlFor="toggle" className="button" />
-            <form onSubmit={e => handleSubmitMessage(e)}>
+            <label htmlFor="toggle" className="buttonChat" />
+            <form className="formChat" onSubmit={e => handleSubmitMessage(e)}>
                 <h2>CHAT</h2>
                 <div className="message">
                     <input
@@ -55,10 +55,17 @@ const ChatSocket = () => {
                         value={message}
                     />
                 </div>
-                <ul>
+                <ul className="ulBoxMessage">
                     {user ? messages.map((message, index) => (
-                        <div style={{ alignSelf: `${user.username === message.username ? 'flex-end' : 'flex-start'}` }}>
+                        <div 
+                            style={{ 
+                                alignSelf: 
+                                `${user.username === message.username 
+                                ? 'flex-end' : 'flex-start'}`
+                                }}
+                            >
                             <li key={index}
+                                className="liItemMessage"
                                 style={{
                                     backgroundColor: `${user.username === message.username
                                         ? "#cbf3c7"

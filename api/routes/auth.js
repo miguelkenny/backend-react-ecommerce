@@ -6,6 +6,9 @@ import multer from 'multer'
 import sendInfoEmail from '../nodemailer/SendEmail.js'
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { config } from 'dotenv'
+
+config()
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -19,7 +22,7 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
         const fileName = req.body.username
-            
+
         const fileExtension = path.extname(file.originalname)
 
         cb(null, `${fileName}-${Date.now()}${fileExtension}`)
@@ -32,7 +35,7 @@ const upload = multer({ storage: storage })
 authRoutes.post('/register', upload.single("file"), async (req, res) => {
     const register = 1
     const { file, body } = req
-    
+
     if (file && body) {
         const newUser = await new User({
             username: body.username,
@@ -42,7 +45,7 @@ authRoutes.post('/register', upload.single("file"), async (req, res) => {
             direccion: body.direccion,
             edad: body.edad,
             numCel: body.numCel,
-            file: `http://localhost:5000/${file.filename}`
+            file: `${process.env.URI}/${file.filename}`
         })
 
         try {
@@ -59,14 +62,14 @@ authRoutes.post('/register', upload.single("file"), async (req, res) => {
 //LOGUIN
 authRoutes.post('/login', async (req, res) => {
     try {
-        
+
         const user = await User.findOne({ username: req.body.username })
         !user && res.status(401).json('Credenciales Incorrectas')
 
         const hasPassword = CryptoJS.AES.decrypt(user.password, process.env.PASS_SEC)
 
         const originalPassword = hasPassword.toString(CryptoJS.enc.Utf8)
-        
+
         originalPassword !== req.body.password && res.status(401).json('Credenciales Incorrectas')
 
         const accessToken = jwt.sign(
@@ -77,7 +80,7 @@ authRoutes.post('/login', async (req, res) => {
             process.env.JWT_SEC,
             { expiresIn: "1d" }
         )
-        
+
         const { password, ...others } = user._doc
         res.status(200).json({ ...others, accessToken })
 
