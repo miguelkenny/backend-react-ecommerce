@@ -57,20 +57,20 @@ const ChatSocket = () => {
                 </div>
                 <ul className="ulBoxMessage">
                     {user ? messages.map((message, index) => (
-                        <div 
-                            style={{ 
-                                alignSelf: 
-                                `${user.username === message.username 
-                                ? 'flex-end' : 'flex-start'}`
-                                }}
-                            >
+                        <div
+                            style={{
+                                alignSelf:
+                                    `${user.username === message.username
+                                        ? 'flex-end' : 'flex-start'}`
+                            }}
+                        >
                             <li key={index}
                                 className="liItemMessage"
                                 style={{
                                     backgroundColor: `${user.username === message.username
                                         ? "#cbf3c7"
                                         : "#fff"
-                                    }`
+                                        }`
                                 }}
                             >
                                 <p style={{ fontSize: "15px" }}>{message.message}</p>
@@ -78,7 +78,9 @@ const ChatSocket = () => {
                             </li>
                         </div>
                     )) :
-                        <p>Debes Iniciar Sesión para poder usar el Chat</p>
+                        <div style={{justifyContent: "center", marginTop: "20%", marginLeft: "30px", marginRight: "30px"}}>
+                            <p style={{fontSize:"22px"}}>Iniciar Sesión para usar el Chat</p>
+                        </div>
                     }
                 </ul>
             </form>
