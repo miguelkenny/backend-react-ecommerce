@@ -8,18 +8,26 @@ import cartRoutes from './routes/cart.js'
 import orderRoutes from './routes/order.js'
 import stripeRoutes from './routes/stripe.js'
 import cors from 'cors'
+import { Server as serverSocket } from "socket.io"
+import http from 'http'
+import { chatSocket } from './socket/socket.js'
 
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-import { chatSocket } from './socket/socket.js'
-
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-chatSocket()
+
 
 const app = express();
+const server = http.createServer(app)
+    const io = new serverSocket(server, {
+        cors: {
+            origin: '*'
+        }
+    }
+)
 
 config();
 
@@ -45,6 +53,9 @@ app.use('/api/carts', cartRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/checkout', stripeRoutes)
 
-app.listen(process.env.PORT || 5000, () => {
+
+chatSocket(io)
+
+server.listen(process.env.PORT || 5000, () => {
     console.log('Backend server listening on port ', process.env.PORT)
 });

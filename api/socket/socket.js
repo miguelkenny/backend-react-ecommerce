@@ -1,20 +1,6 @@
-import express from 'express'
-import cors from 'cors'
-import { Server as serverSocket } from "socket.io"
-import http from 'http'
 import Chat from '../models/Chat.js'
 
-export const chatSocket = () => {
-
-    const app = express()
-    const server = http.createServer(app)
-    const io = new serverSocket(server, {
-        cors: {
-            origin: '*'
-        }
-    })
-
-    app.use(cors())
+export const chatSocket = (io) => {
 
     io.on('connection', (socket) => {
         console.log("Usuario Conectado. ID:", socket.id);
@@ -29,9 +15,4 @@ export const chatSocket = () => {
             })
         })
     })
-
-    const PORT = 0
-    server.listen(PORT || 5000, () => {
-        console.log('Socket server listening on port ', PORT)
-    });
 }
