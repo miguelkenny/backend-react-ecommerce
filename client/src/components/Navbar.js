@@ -91,7 +91,7 @@ const Navbar = () => {
   const quantity = useSelector(state => state.cart.quantity)
   let user = useSelector(state => state.user.currentUser)
   const navigate = useNavigate()
-
+  
   const handleClickLogOut = () => {
   
     dispatch(logoutUser({}))
