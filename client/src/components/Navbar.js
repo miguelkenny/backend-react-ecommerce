@@ -9,7 +9,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { logoutUser } from '../redux/userRedux'
 
 const Container = styled.div`
-  height: 80px;
+  height: 150px;
   ${mobile({ height: "50px" })}
 `;
 
@@ -25,12 +25,6 @@ const Left = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
-`;
-
-const Icon = styled.span`
-  font-size: 14px;
-  cursor: pointer;
-  ${mobile({ display: "none" })}
 `;
 
 const SearchContainer = styled.div`
@@ -51,8 +45,8 @@ const Center = styled.div`
   text-align: center;
 `;
 
-const Logo = styled.h1`
-  font-weight: bold;
+const ImageLogo = styled.img`
+  width: 22%;
   ${mobile({ fontSize: "24px" })}
 `;
 const Right = styled.div`
@@ -104,7 +98,6 @@ const Navbar = () => {
     <Container>
       <Wrapper>
         <Left>
-          <Icon>ES</Icon>
           <SearchContainer>
             <Input placeholder="Buscar" />
             <Search style={{ color: "gray", fontSize: 16 }} />
@@ -112,7 +105,7 @@ const Navbar = () => {
         </Left>
         <Center>
           <NavLink to="/">
-            <Logo>WOMEN-SHOP</Logo>
+            <ImageLogo alt='logo Women Shop' src='https://i.ibb.co/jv7T7k4/logo-no-background.png'/>
           </NavLink>
         </Center>
         <Right>
